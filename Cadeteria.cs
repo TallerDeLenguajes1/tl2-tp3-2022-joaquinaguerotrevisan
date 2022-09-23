@@ -18,7 +18,7 @@ public class Cadeteria
     }
     public void Cambiar_Estado_Pedido(int _Id_Pedido)
     {
-        
+
     }
 
     // CONSTRUCTOR ---
@@ -29,3 +29,13 @@ public class Cadeteria
     }
 
 }
+
+/*
+     ___________                     ___________
+    |           |                   |           |
+    |           |                   |           |
+    |           |   |     |     |   |           |
+    |           |   |     |     |   |           |
+    |___________|   |_____|_____|   |___________|
+            
+*/
