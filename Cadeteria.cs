@@ -9,12 +9,16 @@ public class Cadeteria
     public List<Cadete> Lista_Cadete;
 
     // METODO/S ---
-    public Agregar_Cadete(Cadete _Cadete);
+    public void Agregar_Cadete(Cadete _Cadete);
+    public void Cambiar_Estado_Pedido(int _Id_Pedido);
 
-
-    public Agregar_Cadete(Cadete _Cadete)
+    public void Agregar_Cadete(Cadete _Cadete)
     {
         Lista_Cadete.Add(_Cadete);
+    }
+    public void Cambiar_Estado_Pedido(int _Id_Pedido)
+    {
+        
     }
 
     // CONSTRUCTOR ---
