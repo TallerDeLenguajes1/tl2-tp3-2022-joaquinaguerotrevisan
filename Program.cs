@@ -12,19 +12,18 @@ public static class Program
         Cadete Cadet1, Cadet2;
         Cadeteria Cadeteria1;
 
-        Client1 = new Cliente(00, "Pepe", "Av.Gen", 000001, "Black");
-        Client2 = new Cliente(01, "Sasa", "Av.Yen", 000002, "White");
-
-        Ped1 = new Pedido(00, "Pepas", Client1, 100, 0);
-        Ped2 = new Pedido(01, "Salsa", Client2, 100, 0);
-
-        Cadet1 = new Cadete(00, "Jose", "Joselia", 000400);
-        Cadet2 = new Cadete(01, "Maria", "Gardenia", 000500);
-
-        Cadeteria1 = new Cadeteria("Sand", 100000);
-
         try
         {
+            Client1 = new Cliente(00, "Pepe", "Av.Gen", 000001, "Black");
+            Client2 = new Cliente(01, "Sasa", "Av.Yen", 000002, "White");
+
+            Ped1 = new Pedido(00, "Pepas", Client1, 100, 0);
+            Ped2 = new Pedido(01, "Salsa", Client2, 100, 0);
+
+            Cadet1 = new Cadete(00, "Jose", "Joselia", 000400);
+            Cadet2 = new Cadete(01, "Maria", "Gardenia", 000500);
+
+            Cadeteria1 = new Cadeteria("Sand", 100000);
             Cadet1.Agregar_Pedido(Ped1);
             Cadet1.Agregar_Pedido(Ped2);
 
