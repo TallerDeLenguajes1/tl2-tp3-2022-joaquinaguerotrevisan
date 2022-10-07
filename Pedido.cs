@@ -7,6 +7,7 @@ public class Pedido
     public int Id;
     public string Observaciones;
     public Cliente Cliente;
+    public float Precio;
     public bool Estado;
     /*
         Estado = 0 : No entregado.
@@ -14,11 +15,12 @@ public class Pedido
     */
 
     // CONSTRUCTOR ---
-    public Pedido(int _Id, string _Observaciones, Cliente _Cliente, bool _Estado)
+    public Pedido(int _Id, string _Observaciones, Cliente _Cliente, float _Precio, bool _Estado)
     {
         Id = _Id;
         Observaciones = _Observaciones;
         Cliente = _Cliente;
+        Precio = _Precio;
         Estado = _Estado;
     }
 }

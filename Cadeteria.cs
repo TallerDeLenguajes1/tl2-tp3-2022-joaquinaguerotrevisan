@@ -12,6 +12,7 @@ public class Cadeteria
     public void Agregar_Cadete(Cadete _Cadete);
     public void Cambiar_Estado_Pedido(int _Id_Pedido, int _Id_Cadete, bool _Estado);
     public void Trasladar_Pedido_Cadete(int _Id_Pedido, int _Cadete_Origen, Cadete _Cadete_Fin);
+    public void Informe_Jornada();
 
     public void Agregar_Cadete(Cadete _Cadete)
     {
@@ -73,6 +74,38 @@ public class Cadeteria
             }
         }
         */
+    }
+
+    public void Informe_Jornada()
+    {
+        int Cantidad_Pedidos_Cadete = 0, Cantidad_Cadete = 0;
+        float Monto_Ganado_Cadete = 0, Monto_Total_Jornada = 0; 
+        
+        foreach (Cadete Cadete in Lista_Cadete)
+        {   
+            Cantidad_Cadete++;
+            Cantidad_Pedidos_Cadete = 0;
+            Monto_Ganado_Cadete = 0;
+
+            foreach (Pedido Pedido in Cadete.Lista_Pedido)
+            {
+                Cantidad_Pedidos_Cadete++;
+                Monto_Ganado_Cadete += Pedido.Precio;
+                Monto_Total_Jornada += Pedido.Precio;
+            }
+
+            Console.WriteLine("   [ Cadete | ", Cadete," ]");
+            Console.WriteLine("     Cantidad de pedidos : ", Cantidad_Pedidos_Cadete);
+            Console.WriteLine("     Monto obtenido : ", Monto_Ganado_Cadete);
+
+        }
+
+        Console.WriteLine("   | Monto total de la Jornada $", Monto_Total_Jornada," |");
+        if (!Cantidad_Cadete)
+        {
+            Console.WriteLine("   | Envio Promedio : ", Cantidad_Pedidos_Cadete/Cantidad_Cadete);
+        }
+        
     }
 
     // CONSTRUCTOR ---
