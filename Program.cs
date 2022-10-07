@@ -3,6 +3,8 @@ namespace TP3;
 
 public static class Program 
 {
+    private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
     public static void Main(string[] args)
     {
         Cliente Client1, Client2;
@@ -21,15 +23,35 @@ public static class Program
 
         Cadeteria1 = new Cadeteria("Sand", 100000);
 
-        Cadet1.Agregar_Pedido(Ped1);
-        Cadet1.Agregar_Pedido(Ped2);
+        try
+        {
+            Cadet1.Agregar_Pedido(Ped1);
+            Cadet1.Agregar_Pedido(Ped2);
 
-        Cadet2.Agregar_Pedido(Ped1);
-        Cadet2.Agregar_Pedido(Ped2);
+            Cadet2.Agregar_Pedido(Ped1);
+            Cadet2.Agregar_Pedido(Ped2);
 
-        Cadeteria1.Agregar_Cadete(Cadet1);
-        Cadeteria1.Agregar_Cadete(Cadet2);
+            Cadeteria1.Agregar_Cadete(Cadet1);
+            Cadeteria1.Agregar_Cadete(Cadet2);
 
-        Cadeteria1.Informe_Jornada();       
+            Cadeteria1.Informe_Jornada();              
+        }
+        catch (FormatException)
+        {
+            Logger.Error("Error de formato!");
+        }
+        catch (OverflowException)
+        {
+            Logger.Error("Error de representacion!");
+        }        
+        catch (DivideByZeroException)
+        {
+            Logger.Error("Division por cero!");
+        }
+        catch (Exception e)
+        {
+            Logger.Error("Exception encontrada! ", e);
+        }
+        NLog.LogManager.Shutdown();
     }
 }
