@@ -15,11 +15,11 @@ public class Pedido
     */
 
     // CONSTRUCTOR ---
-    public Pedido(int _Id, string _Observaciones, Cliente _Cliente, float _Precio, bool _Estado)
+    public Pedido(int _Id, string _Observaciones, float _Precio, bool _Estado, int _Id_C, string _Nombre_C, string _Domicilio_C, string _Telefono_C, string _Datos_Referencia_Direccion_C)
     {
         Id = _Id;
         Observaciones = _Observaciones;
-        Cliente = _Cliente;
+        Cliente = new Cliente(_Id_C, _Nombre_C, _Domicilio_C, _Telefono_C, _Datos_Referencia_Direccion_C);
         Precio = _Precio;
         Estado = _Estado;
     }

@@ -1,16 +1,16 @@
 using System;
 namespace TP3;
 
-public class Perosna
+public class Persona
 {
     //ATRIBUTO/S ---
     public int Id;
     public string Nombre;
     public string Domicilio;
-    public int Telefono;
+    public string Telefono;
 
     //CONSTRUCTOR ---
-    public Persona(int _Id, string _Nombre, string _Domicilio, int _Telefono)
+    public Persona(int _Id, string _Nombre, string _Domicilio, string _Telefono)
     {
         Id = _Id;
         Nombre = _Nombre;
@@ -25,7 +25,7 @@ public class Cliente : Persona
     public string Datos_Referencia_Direccion;
 
     //CONSTRUCTOR ---
-    public Cliente(int _Id, string _Nombre, string _Domicilio, int _Telefono, string _Datos_Referencia_Direccion) : base(_Id, _Nombre, _Domicilio, _Telefono)
+    public Cliente(int _Id, string _Nombre, string _Domicilio, string _Telefono, string _Datos_Referencia_Direccion) : base(_Id, _Nombre, _Domicilio, _Telefono)
     {
         Datos_Referencia_Direccion = _Datos_Referencia_Direccion;
     }
@@ -37,9 +37,6 @@ public class Cadete : Persona
     public List<Pedido> Lista_Pedido;
 
     // METODO/S ---
-    public void Agregar_Pedido(Pedido _Pedido);
-    public void Eliminar_Pedido(int _Id);
-
     public void Agregar_Pedido(Pedido _Pedido)
     {
         Lista_Pedido.Add(_Pedido);
@@ -48,12 +45,15 @@ public class Cadete : Persona
     {
         Pedido? Pedido_1 = this.Lista_Pedido.Find( Pedido => Pedido.Id == _Id);
 
-        if (Pedido_1 != null && Pedido_1.Estado != 1)
+        if (Pedido_1 != null && !Pedido_1.Estado)
         {
             Lista_Pedido.Remove(Pedido_1);
         }
     }
 
     //CONSTRUCTOR ---
-    public Cadete(int _Id, string _Nombre, string _Domicilio, int _Telefono) : base(Id, _Nombre, _Domicilio, _Telefono);
+    public Cadete(int _Id, string _Nombre, string _Domicilio, string _Telefono) : base(_Id, _Nombre, _Domicilio, _Telefono)
+    {
+        Lista_Pedido = new List<Pedido>();
+    }
 }

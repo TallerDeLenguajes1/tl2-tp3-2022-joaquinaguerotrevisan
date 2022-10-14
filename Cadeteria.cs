@@ -9,11 +9,6 @@ public class Cadeteria
     public List<Cadete> Lista_Cadete;
 
     // METODO/S ---
-    public void Agregar_Cadete(Cadete _Cadete);
-    public void Cambiar_Estado_Pedido(int _Id_Pedido, int _Id_Cadete, bool _Estado);
-    public void Trasladar_Pedido_Cadete(int _Id_Pedido, int _Cadete_Origen, Cadete _Cadete_Fin);
-    public void Informe_Jornada();
-
     public void Agregar_Cadete(Cadete _Cadete)
     {
         Lista_Cadete.Add(_Cadete);
@@ -23,7 +18,7 @@ public class Cadeteria
     {
         Cadete? Cadete = this.Lista_Cadete.Find(Cadete => Cadete.Id == _Id_Cadete);
 
-        Pedido? Pedido = Cadete.Lista_Pedido.Find(Pedido => Pedido.Id == _Id_Pedido);
+        Pedido? Pedido = Cadete?.Lista_Pedido.Find(Pedido => Pedido.Id == _Id_Pedido);
 
         if (Cadete != null && Pedido != null)
         {
@@ -50,12 +45,12 @@ public class Cadeteria
     {
         Cadete? Cadete_Origen = this.Lista_Cadete.Find(Cadete => Cadete.Id == _Id_Cadete_Origen);
 
-        Pedido? Pedido = Cadete_Origen.Lista_Pedido.Find(Pedido => Pedido.Id == _Id_Pedido);
+        Pedido? Pedido = Cadete_Origen?.Lista_Pedido.Find(Pedido => Pedido.Id == _Id_Pedido);
 
         if (Cadete_Origen != null && Pedido != null)
         {
             _Cadete_Fin.Agregar_Pedido(Pedido);
-            Cadete_Origen.Eliminar_Pedido(Pedido);
+            Cadete_Origen.Eliminar_Pedido(Pedido.Id);
         }
 
         /*
@@ -78,41 +73,44 @@ public class Cadeteria
 
     public void Informe_Jornada()
     {
-        int Cantidad_Pedidos_Cadete = 0, Cantidad_Cadete = 0;
+        int Cantidad_Pedidos_Cadete_Mostrar = 0, Cantidad_Cadete = 0, Cantidad_Pedidos_Cadete = 0;
         float Monto_Ganado_Cadete = 0, Monto_Total_Jornada = 0; 
         
         foreach (Cadete Cadete in Lista_Cadete)
         {   
             Cantidad_Cadete++;
-            Cantidad_Pedidos_Cadete = 0;
+            Cantidad_Pedidos_Cadete_Mostrar = 0;
             Monto_Ganado_Cadete = 0;
 
             foreach (Pedido Pedido in Cadete.Lista_Pedido)
             {
+                Cantidad_Pedidos_Cadete_Mostrar++;
                 Cantidad_Pedidos_Cadete++;
                 Monto_Ganado_Cadete += Pedido.Precio;
                 Monto_Total_Jornada += Pedido.Precio;
             }
 
-            Console.WriteLine("   [ Cadete | ", Cadete," ]");
-            Console.WriteLine("     Cantidad de pedidos : ", Cantidad_Pedidos_Cadete);
-            Console.WriteLine("     Monto obtenido : ", Monto_Ganado_Cadete);
+            Console.WriteLine("   [ Cadete | "+ Cadete.Nombre+" ]");
+            Console.WriteLine("     Cantidad de pedidos : "+ Cantidad_Pedidos_Cadete_Mostrar);
+            Console.WriteLine("     Monto obtenido : "+ Monto_Ganado_Cadete);
 
         }
 
-        Console.WriteLine("   | Monto total de la Jornada $", Monto_Total_Jornada," |");
-        if (!Cantidad_Cadete)
+        Console.WriteLine("   | Monto total de la Jornada $"+ Monto_Total_Jornada," |");
+
+        if (Cantidad_Cadete != 0)
         {
-            Console.WriteLine("   | Envio Promedio : ", Cantidad_Pedidos_Cadete/Cantidad_Cadete);
+            Console.WriteLine("   | Envio Promedio : "+(Cantidad_Pedidos_Cadete/Cantidad_Cadete)+" |");
         }
         
     }
 
     // CONSTRUCTOR ---
-    public Cadeteria (string _Nombre, string _Telefono)
+    public Cadeteria (string _Nombre, string _Telefono, List<Cadete> _Lista_Cadete)
     {
         Nombre = _Nombre;
         Telefono = _Telefono;
+        Lista_Cadete = _Lista_Cadete;
     }
 
 }
